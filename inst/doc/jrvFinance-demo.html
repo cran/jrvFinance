@@ -12,17 +12,17 @@
 
 <meta name="author" content="Jayanth R. Varma" />
 
-<meta name="date" content="2018-06-16" />
+<meta name="date" content="2019-03-15" />
 
 <title>jrvFinance Usage</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -35,13 +35,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -83,7 +81,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -271,6 +291,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -279,8 +302,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">jrvFinance Usage</h1>
-<h4 class="author"><em>Jayanth R. Varma</em></h4>
-<h4 class="date"><em>2018-06-16</em></h4>
+<h4 class="author">Jayanth R. Varma</h4>
+<h4 class="date">2019-03-15</h4>
 
 
 
@@ -299,156 +322,156 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="introduction" class="section level1">
 <h1><a name="intro"></a>Introduction</h1>
 <p>The <code>jrvFinance</code> R package implements the basic financial analysis functions similar to (but not identical to) what is available in most spreadsheet software. This includes finding the IRR and NPV of regularly spaced cash flows and annuities. Bond pricing and YTM calculations are included. In addition, Black Scholes option pricing and Greeks are also provided.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(jrvFinance)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(jrvFinance)</a></code></pre></div>
 </div>
 <div id="npv-and-irr" class="section level1">
 <h1><a name="npv"></a>NPV and IRR</h1>
 <p>Find Net Present Value (NPV) at 5% of cash flows of 100, 250 and 300 in years 1, 2 and 3 respectively:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">npv</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">300</span>), <span class="dt">rate=</span><span class="fl">5e-2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">npv</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">300</span>), <span class="dt">rate=</span><span class="fl">5e-2</span>)</a></code></pre></div>
 <pre><code>## [1] 581.1467</code></pre>
 <p>Find NPV at 10% of cash flows of 1, 3 and 2 in years 0.3, 1.9 and 2.5 respectively (this is known in XNPV in spreadsheet software):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">npv</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>), <span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">cf.t=</span><span class="kw">c</span>(<span class="fl">0.3</span>,<span class="fl">1.9</span>,<span class="fl">2.5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">npv</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>), <span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">cf.t=</span><span class="kw">c</span>(<span class="fl">0.3</span>,<span class="fl">1.9</span>,<span class="fl">2.5</span>))</a></code></pre></div>
 <pre><code>## [1] 5.050866</code></pre>
 <p>Find the rate of interest (IRR) if a loan of 600 is repaid in two annual instalments of 300 and 400:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">irr</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">600</span>,<span class="dv">300</span>,<span class="dv">400</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">irr</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">600</span>,<span class="dv">300</span>,<span class="dv">400</span>))</a></code></pre></div>
 <pre><code>## [1] 0.1039126</code></pre>
 <p>Negative interest rates are handled without difficulty</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">irr</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">600</span>,<span class="dv">100</span>,<span class="dv">400</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">irr</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">600</span>,<span class="dv">100</span>,<span class="dv">400</span>))</a></code></pre></div>
 <pre><code>## [1] -0.09592852</code></pre>
 <p>Find the rate of interest if a loan of 450 is repaid by paying 100 after 0.3 years, 300 after 1.9 years and 200 after 2.5 years (this is known in XIRR in spreadsheet software)</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">450</span>,<span class="dv">100</span>,<span class="dv">300</span>,<span class="dv">200</span>), <span class="dt">cf.t=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>,<span class="fl">1.9</span>,<span class="fl">2.5</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">450</span>,<span class="dv">100</span>,<span class="dv">300</span>,<span class="dv">200</span>), <span class="dt">cf.t=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>,<span class="fl">1.9</span>,<span class="fl">2.5</span>)) </a></code></pre></div>
 <pre><code>## [1] 0.1746131</code></pre>
 <p>Find multiple IRRs by providing interval within which to search for the IRR:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">interval =</span> <span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.17</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">interval =</span> <span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.17</span>)) </a></code></pre></div>
 <pre><code>## [1] 0.1</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">interval =</span> <span class="kw">c</span>(<span class="fl">0.17</span>, <span class="fl">0.50</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">interval =</span> <span class="kw">c</span>(<span class="fl">0.17</span>, <span class="fl">0.50</span>)) </a></code></pre></div>
 <pre><code>## [1] 0.2</code></pre>
 <p>Find multiple IRRs by providing different guess values for the IRR:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">r.guess =</span> <span class="dv">0</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">r.guess =</span> <span class="dv">0</span>) </a></code></pre></div>
 <pre><code>## [1] 0.1</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">r.guess =</span> <span class="fl">0.5</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">irr</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">-230</span>, <span class="dv">132</span>), <span class="dt">r.guess =</span> <span class="fl">0.5</span>) </a></code></pre></div>
 <pre><code>## [1] 0.2</code></pre>
 </div>
 <div id="duration-of-general-cash-flows" class="section level1">
 <h1><a name="dur"></a>Duration of general cash flows</h1>
 <p>There is a separate set of functions for computing duration for bonds. In this section, we look at the functions for computing duration of general sequence of cash flows.</p>
 <p>Find duration of a stream of cash flows of 100, 250 and 300 in years 1, 2 and 3 when the interest rate is 5%:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">duration</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">300</span>), <span class="dt">rate=</span><span class="fl">5e-2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">duration</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">300</span>), <span class="dt">rate=</span><span class="fl">5e-2</span>)</a></code></pre></div>
 <pre><code>## [1] 2.282051</code></pre>
 <p>Find modified duration of same cash flows:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">duration</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">300</span>), <span class="dt">rate=</span><span class="fl">5e-2</span>, <span class="dt">modified=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">duration</span>(<span class="dt">cf=</span><span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">300</span>), <span class="dt">rate=</span><span class="fl">5e-2</span>, <span class="dt">modified=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 2.173382</code></pre>
 </div>
 <div id="annuity-functions" class="section level1">
 <h1><a name="annuity"></a>Annuity functions</h1>
 <p>Find the present value at 10% of 15 annual instalments of 1 each period:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">n.periods=</span><span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">n.periods=</span><span class="dv">15</span>)</a></code></pre></div>
 <pre><code>## [1] 7.60608</code></pre>
 <p>Find present value at 10% of 15 annual instalments of 1 each period where the annuity starts immediately:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">n.periods=</span><span class="dv">15</span>, <span class="dt">immediate.start =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">n.periods=</span><span class="dv">15</span>, <span class="dt">immediate.start =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 8.366687</code></pre>
 <p>Find the present value at 7% of a perpetuity of 35 per annum :</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">7e-2</span>, <span class="dt">instalment =</span> <span class="dv">35</span>, <span class="dt">n.periods=</span><span class="ot">Inf</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">7e-2</span>, <span class="dt">instalment =</span> <span class="dv">35</span>, <span class="dt">n.periods=</span><span class="ot">Inf</span>)</a></code></pre></div>
 <pre><code>## [1] 500</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">## or more simply</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">7e-2</span>, <span class="dt">instalment =</span> <span class="dv">35</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co">## or more simply</span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">7e-2</span>, <span class="dt">instalment =</span> <span class="dv">35</span>)</a></code></pre></div>
 <pre><code>## [1] 500</code></pre>
 <p>Consider an annuity of 360 monthly instalments (30 years) where each instalment is 450. Find the present value of the above annuity at 10% semi-annually compounded:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">instalment =</span> <span class="dv">450</span>, <span class="dt">n.periods=</span><span class="dv">360</span>, <span class="dt">cf.freq=</span><span class="dv">12</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">annuity.pv</span>(<span class="dt">rate=</span><span class="fl">10e-2</span>, <span class="dt">instalment =</span> <span class="dv">450</span>, <span class="dt">n.periods=</span><span class="dv">360</span>, <span class="dt">cf.freq=</span><span class="dv">12</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 52163.75</code></pre>
 <p>Find the semi-annually compounded rate if the above annuity has present value of 50,000:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">annuity.rate</span>(<span class="dt">pv=</span><span class="dv">50000</span>, <span class="dt">instalment =</span> <span class="dv">450</span>, <span class="dt">n.periods=</span><span class="dv">360</span>, <span class="dt">cf.freq=</span><span class="dv">12</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">annuity.rate</span>(<span class="dt">pv=</span><span class="dv">50000</span>, <span class="dt">instalment =</span> <span class="dv">450</span>, <span class="dt">n.periods=</span><span class="dv">360</span>, <span class="dt">cf.freq=</span><span class="dv">12</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 0.1052609</code></pre>
 <p>Negative interest rates are handled without difficulty:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">annuity.rate</span>(<span class="dt">pv=</span><span class="dv">250000</span>, <span class="dt">instalment =</span> <span class="dv">450</span>, <span class="dt">n.periods=</span><span class="dv">360</span>, <span class="dt">cf.freq=</span><span class="dv">12</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">annuity.rate</span>(<span class="dt">pv=</span><span class="dv">250000</span>, <span class="dt">instalment =</span> <span class="dv">450</span>, <span class="dt">n.periods=</span><span class="dv">360</span>, <span class="dt">cf.freq=</span><span class="dv">12</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] -0.02685041</code></pre>
 <p>Suppose a loan of 10,000 is to be repaid in 8 equal annual instalments and the interest rate is 9% annually compounded. Find the annual instalment:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">annuity.instalment</span>(<span class="dt">rate=</span><span class="fl">9e-2</span>, <span class="dt">pv=</span><span class="dv">10000</span>, <span class="dt">n.periods=</span><span class="dv">8</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">annuity.instalment</span>(<span class="dt">rate=</span><span class="fl">9e-2</span>, <span class="dt">pv=</span><span class="dv">10000</span>, <span class="dt">n.periods=</span><span class="dv">8</span>)</a></code></pre></div>
 <pre><code>## [1] 1806.744</code></pre>
 <p>Breakup the 5th instalment of above annuity into its principal and interest components:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">AIB &lt;-<span class="st"> </span><span class="kw">annuity.instalment.breakup</span>(<span class="dt">rate=</span><span class="fl">9e-2</span>, <span class="dt">pv=</span><span class="dv">10000</span>, <span class="dt">n.periods=</span><span class="dv">8</span>,</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">                                  <span class="dt">period.no=</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="co"># we use unlist to print the result more compactly</span></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="kw">unlist</span>(AIB)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">AIB &lt;-<span class="st"> </span><span class="kw">annuity.instalment.breakup</span>(<span class="dt">rate=</span><span class="fl">9e-2</span>, <span class="dt">pv=</span><span class="dv">10000</span>, <span class="dt">n.periods=</span><span class="dv">8</span>,</a>
+<a class="sourceLine" id="cb40-2" title="2">                                  <span class="dt">period.no=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb40-3" title="3"><span class="co"># we use unlist to print the result more compactly</span></a>
+<a class="sourceLine" id="cb40-4" title="4"><span class="kw">unlist</span>(AIB)</a></code></pre></div>
 <pre><code>## opening.principal     interest.part    principal.part closing.principal 
 ##         5853.3437          526.8009         1279.9428         4573.4009</code></pre>
 </div>
 <div id="bond-price-yield-and-duration" class="section level1">
 <h1><a name="bond"></a>Bond Price, Yield and Duration</h1>
 <p>Find price on 15 April 2012 of 8% bond maturing on 1 January 2022 at 8.8843% yield (By default, all the bond functions assume semi-annual coupons and semi-annually compounded yield):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">bond.price</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">           <span class="dt">yield=</span><span class="fl">8.8843e-2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">bond.price</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
+<a class="sourceLine" id="cb42-2" title="2">           <span class="dt">yield=</span><span class="fl">8.8843e-2</span>)</a></code></pre></div>
 <pre><code>## [1] 94.30449</code></pre>
 <p>Same bond with annual coupons and annually compounded yield (We use the <code>freq</code> argument to change the coupon frequency. By default, compounding frequency of the yield is assumed to be the same as the coupon frequency):</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">bond.price</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">           <span class="dt">yield=</span><span class="fl">8.8843e-2</span>, <span class="dt">freq=</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">bond.price</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
+<a class="sourceLine" id="cb44-2" title="2">           <span class="dt">yield=</span><span class="fl">8.8843e-2</span>, <span class="dt">freq=</span><span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 94.33212</code></pre>
 <p>Same bond with annual coupon and semi-annually compounded yield (We set the <code>comp-freq</code> argument to use a compounding frequency different from the coupon frequency):</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">bond.price</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">           <span class="dt">yield=</span><span class="fl">8.8843e-2</span>, <span class="dt">freq=</span><span class="dv">1</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">bond.price</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
+<a class="sourceLine" id="cb46-2" title="2">           <span class="dt">yield=</span><span class="fl">8.8843e-2</span>, <span class="dt">freq=</span><span class="dv">1</span>, <span class="dt">comp.freq=</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 93.13936</code></pre>
 <p>A bond with 5% coupon is callable at 102 on 1-Jan-2023 and is trading at an yield to call of 6% on 1-Jan-2018. The price is:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">'2018-01-01'</span>, <span class="dt">mature=</span><span class="st">'2023-01-01'</span>, <span class="dt">coupon=</span><span class="fl">5e-2</span>, <span class="dt">price=</span><span class="dv">101</span>,</a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">           <span class="dt">redemption_value =</span> <span class="dv">102</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">&#39;2018-01-01&#39;</span>, <span class="dt">mature=</span><span class="st">&#39;2023-01-01&#39;</span>, <span class="dt">coupon=</span><span class="fl">5e-2</span>, <span class="dt">price=</span><span class="dv">101</span>,</a>
+<a class="sourceLine" id="cb48-2" title="2">           <span class="dt">redemption_value =</span> <span class="dv">102</span>)</a></code></pre></div>
 <pre><code>## [1] 0.05126732</code></pre>
 <p>Compute the yield given the price:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2">           <span class="dt">price=</span><span class="dv">95</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
+<a class="sourceLine" id="cb50-2" title="2">           <span class="dt">price=</span><span class="dv">95</span>) </a></code></pre></div>
 <pre><code>## [1] 0.08772274</code></pre>
 <p>Negative yields are handled properly:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2017-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">1e-2</span>,</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2">           <span class="dt">price=</span><span class="dv">120</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2017-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">1e-2</span>,</a>
+<a class="sourceLine" id="cb52-2" title="2">           <span class="dt">price=</span><span class="dv">120</span>) </a></code></pre></div>
 <pre><code>## [1] -0.02927941</code></pre>
 <p>Yield to call:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">'2018-01-01'</span>, <span class="dt">mature=</span><span class="st">'2023-01-01'</span>, <span class="dt">coupon=</span><span class="fl">5e-2</span>, <span class="dt">price=</span><span class="dv">101</span>,</a>
-<a class="sourceLine" id="cb54-2" data-line-number="2">           <span class="dt">redemption_value =</span> <span class="dv">102</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">bond.yield</span>(<span class="dt">settle=</span><span class="st">&#39;2018-01-01&#39;</span>, <span class="dt">mature=</span><span class="st">&#39;2023-01-01&#39;</span>, <span class="dt">coupon=</span><span class="fl">5e-2</span>, <span class="dt">price=</span><span class="dv">101</span>,</a>
+<a class="sourceLine" id="cb54-2" title="2">           <span class="dt">redemption_value =</span> <span class="dv">102</span>)</a></code></pre></div>
 <pre><code>## [1] 0.05126732</code></pre>
 <p>Duration on 15 April 2012 of 8% bond maturing on 1 January 2022 at 8.8843% yield (semi-annual coupons and semi-annually compounded yield)</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">bond.duration</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">              <span class="dt">yield=</span><span class="fl">8.8843e-2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">bond.duration</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
+<a class="sourceLine" id="cb56-2" title="2">              <span class="dt">yield=</span><span class="fl">8.8843e-2</span>)</a></code></pre></div>
 <pre><code>## [1] 6.678709</code></pre>
 <p>Modified duration of same bond:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">bond.duration</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">              <span class="dt">yield=</span><span class="fl">8.8843e-2</span>, <span class="dt">modified=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">bond.duration</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">coupon=</span><span class="fl">8e-2</span>,</a>
+<a class="sourceLine" id="cb58-2" title="2">              <span class="dt">yield=</span><span class="fl">8.8843e-2</span>, <span class="dt">modified=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 6.394649</code></pre>
 <p>Find prices of many bonds with one function call:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">bond.prices</span>(<span class="dt">settle=</span><span class="st">&quot;2012-01-01&quot;</span>, <span class="dt">mature=</span><span class="kw">c</span>(<span class="st">&quot;2022-01-01&quot;</span>, <span class="st">&quot;2032-01-01&quot;</span>),</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">            <span class="dt">coupon=</span><span class="kw">c</span>(<span class="fl">0.09</span>, <span class="fl">0.08</span>,<span class="fl">0.07</span>,<span class="fl">0.06</span>), <span class="dt">yield=</span><span class="fl">0.10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">bond.prices</span>(<span class="dt">settle=</span><span class="st">&quot;2012-01-01&quot;</span>, <span class="dt">mature=</span><span class="kw">c</span>(<span class="st">&quot;2022-01-01&quot;</span>, <span class="st">&quot;2032-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb60-2" title="2">            <span class="dt">coupon=</span><span class="kw">c</span>(<span class="fl">0.09</span>, <span class="fl">0.08</span>,<span class="fl">0.07</span>,<span class="fl">0.06</span>), <span class="dt">yield=</span><span class="fl">0.10</span>)</a></code></pre></div>
 <pre><code>## [1] 93.76889 82.84091 81.30668 65.68183</code></pre>
 <p>Find yields of many bonds with one function call</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">bond.yields</span>(<span class="dt">settle=</span><span class="st">&quot;2012-01-01&quot;</span>, <span class="dt">mature=</span><span class="kw">c</span>(<span class="st">&quot;2022-01-01&quot;</span>, <span class="st">&quot;2032-01-01&quot;</span>),</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2">            <span class="dt">coupon=</span><span class="kw">c</span>(<span class="fl">0.09</span>, <span class="fl">0.08</span>,<span class="fl">0.07</span>,<span class="fl">0.06</span>),</a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">            <span class="dt">price=</span><span class="kw">c</span>(<span class="dv">94</span>, <span class="dv">83</span>, <span class="dv">81</span>, <span class="dv">65</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">bond.yields</span>(<span class="dt">settle=</span><span class="st">&quot;2012-01-01&quot;</span>, <span class="dt">mature=</span><span class="kw">c</span>(<span class="st">&quot;2022-01-01&quot;</span>, <span class="st">&quot;2032-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb62-2" title="2">            <span class="dt">coupon=</span><span class="kw">c</span>(<span class="fl">0.09</span>, <span class="fl">0.08</span>,<span class="fl">0.07</span>,<span class="fl">0.06</span>),</a>
+<a class="sourceLine" id="cb62-3" title="3">            <span class="dt">price=</span><span class="kw">c</span>(<span class="dv">94</span>, <span class="dv">83</span>, <span class="dv">81</span>, <span class="dv">65</span>))</a></code></pre></div>
 <pre><code>## [1] 0.09961336 0.09978548 0.10056533 0.10110332</code></pre>
 <p>Find durations of many bonds with one function call:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">bond.durations</span>(<span class="dt">settle=</span><span class="st">&quot;2012-01-01&quot;</span>,</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2">               <span class="dt">mature=</span><span class="kw">c</span>(<span class="st">&quot;2022-01-01&quot;</span>, <span class="st">&quot;2032-01-01&quot;</span>),</a>
-<a class="sourceLine" id="cb64-3" data-line-number="3">               <span class="dt">coupon=</span><span class="kw">c</span>(<span class="fl">0.09</span>, <span class="fl">0.08</span>,<span class="fl">0.07</span>,<span class="fl">0.06</span>),  <span class="dt">yield=</span><span class="fl">0.10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">bond.durations</span>(<span class="dt">settle=</span><span class="st">&quot;2012-01-01&quot;</span>,</a>
+<a class="sourceLine" id="cb64-2" title="2">               <span class="dt">mature=</span><span class="kw">c</span>(<span class="st">&quot;2022-01-01&quot;</span>, <span class="st">&quot;2032-01-01&quot;</span>),</a>
+<a class="sourceLine" id="cb64-3" title="3">               <span class="dt">coupon=</span><span class="kw">c</span>(<span class="fl">0.09</span>, <span class="fl">0.08</span>,<span class="fl">0.07</span>,<span class="fl">0.06</span>),  <span class="dt">yield=</span><span class="fl">0.10</span>)</a></code></pre></div>
 <pre><code>## [1] 6.681623 9.385458 7.023446 9.959342</code></pre>
 <p>Find all the coupon dates of a bond:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">coupons.dates</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">coupons.dates</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>)</a></code></pre></div>
 <pre><code>##  [1] &quot;2012-07-01&quot; &quot;2013-01-01&quot; &quot;2013-07-01&quot; &quot;2014-01-01&quot; &quot;2014-07-01&quot;
 ##  [6] &quot;2015-01-01&quot; &quot;2015-07-01&quot; &quot;2016-01-01&quot; &quot;2016-07-01&quot; &quot;2017-01-01&quot;
 ## [11] &quot;2017-07-01&quot; &quot;2018-01-01&quot; &quot;2018-07-01&quot; &quot;2019-01-01&quot; &quot;2019-07-01&quot;
 ## [16] &quot;2020-01-01&quot; &quot;2020-07-01&quot; &quot;2021-01-01&quot; &quot;2021-07-01&quot; &quot;2022-01-01&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">coupons.dates</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">freq=</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">coupons.dates</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-01-01&quot;</span>, <span class="dt">freq=</span><span class="dv">1</span>)</a></code></pre></div>
 <pre><code>##  [1] &quot;2013-01-01&quot; &quot;2014-01-01&quot; &quot;2015-01-01&quot; &quot;2016-01-01&quot; &quot;2017-01-01&quot;
 ##  [6] &quot;2018-01-01&quot; &quot;2019-01-01&quot; &quot;2020-01-01&quot; &quot;2021-01-01&quot; &quot;2022-01-01&quot;</code></pre>
 <p>Find a specific coupon date:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">coupons.next</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-04-01&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">coupons.next</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-04-01&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;2012-10-01&quot;</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="kw">coupons.prev</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-04-01&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">coupons.prev</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2022-04-01&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;2012-04-01&quot;</code></pre>
 <p>Find the number of coupons:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw">coupons.n</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2017-07-01&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">coupons.n</span>(<span class="dt">settle=</span><span class="st">&quot;2012-04-15&quot;</span>, <span class="dt">mature=</span><span class="st">&quot;2017-07-01&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] 11</code></pre>
 </div>
 <div id="generalized-black-scholes-formulas" class="section level1">
 <h1><a name="gbs"></a> (Generalized) Black Scholes Formulas</h1>
 <p>Find Black Scholes options values and Greeks when spot price and strike = 100, interest rate = 10%, volatility = 20%, maturity = 1 year:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">BS &lt;-<span class="st"> </span><span class="kw">GenBS</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">100</span>, <span class="dt">r=</span><span class="fl">0.1</span>, <span class="dt">Sigma=</span><span class="fl">20e-2</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="co"># we use unlist to print the result more compactly</span></a>
-<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="kw">unlist</span>(BS)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">BS &lt;-<span class="st"> </span><span class="kw">GenBS</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">100</span>, <span class="dt">r=</span><span class="fl">0.1</span>, <span class="dt">Sigma=</span><span class="fl">20e-2</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb76-2" title="2"><span class="co"># we use unlist to print the result more compactly</span></a>
+<a class="sourceLine" id="cb76-3" title="3"><span class="kw">unlist</span>(BS)</a></code></pre></div>
 <pre><code>##             call              put Greeks.callDelta  Greeks.putDelta 
 ##      13.26967658       3.75341839       0.72574688      -0.27425312 
 ## Greeks.callTheta  Greeks.putTheta     Greeks.Gamma      Greeks.Vega 
@@ -461,9 +484,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ##       0.65542174       0.34457826</code></pre>
 <p>Next we illustrate the generalized Black Scholes formulas where the asset pays a continuous dividend yield. This is useful for foreign currency options, options on futures and options on stock indices.</p>
 <p>Spot price =100, strike = 120, interest rate = 10%, volatility = 15%, maturity = 1 year, and dividend yield = 5.8%:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">GBS &lt;-<span class="st"> </span><span class="kw">GenBS</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">120</span>, <span class="dt">r=</span><span class="fl">0.1</span>, <span class="dt">Sigma=</span><span class="fl">15e-2</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="fl">5.8e-2</span>)</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="co"># we use unlist to print the result more compactly</span></a>
-<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="kw">unlist</span>(GBS)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">GBS &lt;-<span class="st"> </span><span class="kw">GenBS</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">120</span>, <span class="dt">r=</span><span class="fl">0.1</span>, <span class="dt">Sigma=</span><span class="fl">15e-2</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="fl">5.8e-2</span>)</a>
+<a class="sourceLine" id="cb78-2" title="2"><span class="co"># we use unlist to print the result more compactly</span></a>
+<a class="sourceLine" id="cb78-3" title="3"><span class="kw">unlist</span>(GBS)</a></code></pre></div>
 <pre><code>##             call              put Greeks.callDelta  Greeks.putDelta 
 ##       1.42577503      15.64127045       0.18378816      -0.75986179 
 ## Greeks.callTheta  Greeks.putTheta     Greeks.Gamma      Greeks.Vega 
@@ -475,16 +498,16 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ##   extra.callProb    extra.putProb 
 ##       0.15613340       0.84386660</code></pre>
 <p>Find implied volatility when call price is 7.97 ,spot price and strike = 100, interest rate zero, and maturity is 1 year:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">GenBSImplied</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">100</span>, <span class="dt">r=</span><span class="dv">0</span>, <span class="dt">price=</span><span class="fl">7.97</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">GenBSImplied</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">100</span>, <span class="dt">r=</span><span class="dv">0</span>, <span class="dt">price=</span><span class="fl">7.97</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] 0.2001117</code></pre>
 <p>Same as above but strike = 90. Since the option price is less than intrinsic value, the implied volatility is undefined:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">GenBSImplied</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">90</span>, <span class="dt">r=</span><span class="dv">0</span>, <span class="dt">price=</span><span class="fl">7.97</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">GenBSImplied</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">90</span>, <span class="dt">r=</span><span class="dv">0</span>, <span class="dt">price=</span><span class="fl">7.97</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## Warning in GenBSImplied(s = 100, X = 90, r = 0, price = 7.97, t = 1,
 ## div_yield = 0): Implied volatility is undefined because price is outside
 ## theoretical bounds</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>Same as above but strike = 900. Since the strike is so far out of the money, a rather high implied volatility is needed for the option to be valuable:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="kw">GenBSImplied</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">900</span>, <span class="dt">r=</span><span class="dv">0</span>, <span class="dt">price=</span><span class="fl">7.97</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">GenBSImplied</span>(<span class="dt">s=</span><span class="dv">100</span>, <span class="dt">X=</span><span class="dv">900</span>, <span class="dt">r=</span><span class="dv">0</span>, <span class="dt">price=</span><span class="fl">7.97</span>, <span class="dt">t=</span><span class="dv">1</span>, <span class="dt">div_yield=</span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] 1.370036</code></pre>
 </div>
 <div id="utility-functions" class="section level1">
@@ -492,35 +515,35 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="equivalent-rate-with-different-compounding-frequency" class="section level2">
 <h2>Equivalent rate with different compounding frequency</h2>
 <p>Convert 10% monthly compounded rate to equivalent semi-annually compounded rate</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="kw">equiv.rate</span>(<span class="fl">10e-2</span>, <span class="dt">from.freq =</span> <span class="dv">12</span>, <span class="dt">to.freq =</span> <span class="dv">2</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">equiv.rate</span>(<span class="fl">10e-2</span>, <span class="dt">from.freq =</span> <span class="dv">12</span>, <span class="dt">to.freq =</span> <span class="dv">2</span>) </a></code></pre></div>
 <pre><code>## [1] 0.1021066</code></pre>
 <p>Convert 15% annually compounded rate to equivalent continuously compounded rate</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">equiv.rate</span>(<span class="fl">15e-2</span>, <span class="dt">from.freq =</span> <span class="dv">1</span>, <span class="dt">to.freq =</span> <span class="ot">Inf</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">equiv.rate</span>(<span class="fl">15e-2</span>, <span class="dt">from.freq =</span> <span class="dv">1</span>, <span class="dt">to.freq =</span> <span class="ot">Inf</span>)</a></code></pre></div>
 <pre><code>## [1] 0.1397619</code></pre>
 </div>
 <div id="edate" class="section level2">
 <h2>edate</h2>
 <p><code>edate</code> is a common spreadsheet function which is used in this package for finding coupon dates. It is made available for general use.</p>
 <p>Find date eight months prior to 17 May 2005:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">edate</span>(<span class="st">&quot;2005-05-17&quot;</span>, <span class="dv">-8</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">edate</span>(<span class="st">&quot;2005-05-17&quot;</span>, <span class="dv">-8</span>) </a></code></pre></div>
 <pre><code>## [1] &quot;2004-09-17&quot;</code></pre>
 <p>Find date four months after 28 February 2007. Note that the output is the last day of June and not the 28th June</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">edate</span>(<span class="st">&quot;2007-02-28&quot;</span>, <span class="dv">4</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">edate</span>(<span class="st">&quot;2007-02-28&quot;</span>, <span class="dv">4</span>) </a></code></pre></div>
 <pre><code>## [1] &quot;2007-06-30&quot;</code></pre>
 <p>But things change in a leap year</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">edate</span>(<span class="st">&quot;2008-02-28&quot;</span>, <span class="dv">4</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="kw">edate</span>(<span class="st">&quot;2008-02-28&quot;</span>, <span class="dv">4</span>) </a></code></pre></div>
 <pre><code>## [1] &quot;2008-06-28&quot;</code></pre>
 </div>
 <div id="newton-raphson-root-solver" class="section level2">
 <h2>Newton Raphson root solver</h2>
 <p>The package implements a Newton Raphson root solver that is used internally to calculate IRR and YTM. It is available for general use.</p>
 <p>Find root of the equation <em>sin(x) = cos(x)</em>. (Analytically, the root is known to be π/4)</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">fn1 &lt;-<span class="cf">function</span>(x){<span class="kw">list</span>(<span class="dt">value=</span><span class="kw">sin</span>(x)<span class="op">-</span><span class="kw">cos</span>(x), <span class="dt">gradient=</span><span class="kw">cos</span>(x)<span class="op">+</span><span class="kw">sin</span>(x))} </a>
-<a class="sourceLine" id="cb97-2" data-line-number="2"><span class="kw">newton.raphson.root</span>(fn1) </a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">fn1 &lt;-<span class="cf">function</span>(x){<span class="kw">list</span>(<span class="dt">value=</span><span class="kw">sin</span>(x)<span class="op">-</span><span class="kw">cos</span>(x), <span class="dt">gradient=</span><span class="kw">cos</span>(x)<span class="op">+</span><span class="kw">sin</span>(x))} </a>
+<a class="sourceLine" id="cb97-2" title="2"><span class="kw">newton.raphson.root</span>(fn1) </a></code></pre></div>
 <pre><code>## [1] 0.7853982</code></pre>
 <p>Try to find root of equation which has no real root: <em>sin(x) = -2</em></p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">fn2 &lt;-<span class="cf">function</span>(x){<span class="kw">list</span>(<span class="dt">value=</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">gradient=</span><span class="kw">cos</span>(x))}</a>
-<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="kw">newton.raphson.root</span>(fn2) </a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1">fn2 &lt;-<span class="cf">function</span>(x){<span class="kw">list</span>(<span class="dt">value=</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">gradient=</span><span class="kw">cos</span>(x))}</a>
+<a class="sourceLine" id="cb99-2" title="2"><span class="kw">newton.raphson.root</span>(fn2) </a></code></pre></div>
 <pre><code>## Warning: newton.raphson.root failed: Converged to a non zero local minimum</code></pre>
 <pre><code>## [1] NA</code></pre>
 </div>
@@ -528,9 +551,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h2>Bisection root solver</h2>
 <p>The package implements a bisection root solver that does a geometric grid search to bracket the root and then calls <code>uniroot</code> to find the root within this interval. The package uses the function internally to calculate IRR and YTM, but <code>bisection.root</code> is available for general use.</p>
 <p>For example, the values of 1, 7, 12 and 13 do not bracket the root of sin(x) since the function is positive at all these values, but <code>bisection.root</code> finds the root given these numbers as the interval and the guess value.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">bisection.root</span>(sin, <span class="dt">guess =</span> <span class="dv">7</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">13</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">bisection.root</span>(sin, <span class="dt">guess =</span> <span class="dv">7</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">13</span>)</a></code></pre></div>
 <pre><code>## [1] 6.283185</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">bisection.root</span>(sin, <span class="dt">guess =</span> <span class="dv">12</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">13</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">bisection.root</span>(sin, <span class="dt">guess =</span> <span class="dv">12</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">13</span>) </a></code></pre></div>
 <pre><code>## [1] 9.424778</code></pre>
 </div>
 </div>

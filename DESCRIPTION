@@ -1,6 +1,6 @@
 Package: jrvFinance
 Title: Basic Finance; NPV/IRR/Annuities/Bond-Pricing; Black Scholes
-Version: 1.4.0
+Version: 1.4.1
 Authors@R: person(given="Jayanth", family="Varma",
   email="jrvarma@iima.ac.in", role=c("aut","cre"))
 Description: Implements the basic financial analysis
@@ -19,10 +19,10 @@ VignetteBuilder: knitr
 Suggests: knitr
 URL: http://github.com/jrvarma/jrvFinance
 BugReports: http://github.com/jrvarma/jrvFinance/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2018-06-16 16:46:14 UTC; jrvarma
+Packaged: 2019-03-15 10:57:41 UTC; jrvarma
 Author: Jayanth Varma [aut, cre]
 Maintainer: Jayanth Varma <jrvarma@iima.ac.in>
 Repository: CRAN
-Date/Publication: 2018-06-17 06:07:00 UTC
+Date/Publication: 2019-03-15 11:10:47 UTC
